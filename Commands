@@ -1,3 +1,5 @@
+GIT
+-----------------------
 git checkout <branchName>
 git push <repo URL> <branchName>
 git clone <repo URL>
