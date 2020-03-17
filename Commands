@@ -8,5 +8,60 @@ git clone <repo URL>
 
 ----------------
 SFDX
+${CONNECTED_APP_CONSUMER_KEY}=Consumer Key
+${HUB_ORG}=Dev HUB username
+${jwt_key_file}=Server Key Credential id from jenkins
+${SFDC_HOST}=Sales force URL
+${SFDC_USERNAME}=user name which you want to give for scratch org creation
 
-"\"${toolbelt}\" force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile \"${jwt_key_file}\" --setdefaultdevhubusername --instanceurl ${SFDC_HOST} --setalias my-hub-org"
+Authorization Command
+-----------------------
+SFDX force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile \"${jwt_key_file}\" --setdefaultdevhubusername --instanceurl ${SFDC_HOST} --setalias my-hub-org"
+
+To display Number of orgs
+----------------------
+SFDX force:org:list
+
+To retrive data from Dev Org
+------------------------------
+SFDX force:source:retrieve -m CustomTab,CustomApplication,PermissionSet,StaticResource,FlexiPage,AuraDefinitionBundle,LightningComponentBundle,ApexComponent,ApexPage,ApexTrigger,CustomLabels,CustomObject,ContentAsset,ApexClass:<FileName> -u ${HUB_ORG}
+
+To Create a Scratch Org
+--------------------------
+SFDX force:org:create --definitionfile config/project-scratch-def.json -v ${HUB_ORG} username=${SFDC_USERNAME}
+
+Authorizing Scratch org
+------------------------
+SFDX force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --jwtkeyfile \"${jwt_key_file}\" --username ${SFDC_USERNAME} --instanceurl https://test.salesforce.com --setdefaultusername"
+
+To create a Password for ScratchOrg
+-----------------------------------
+SFDX force:user:password:generate --targetusername ${SFDC_USERNAME}
+
+To display particular org Details
+-----------------------------------
+SFDX force:user:display --targetusername ${SFDC_USERNAME}
+
+To push data into Scratch Org
+------------------------------
+SFDX force:source:push --targetusername ${SFDC_USERNAME}
+
+To open a particular Org
+------------------------
+SFDX force:org:open -u ${SFDC_USERNAME}
+
+To logOut orgs
+-----------------
+SFDX force:auth:logout -u ${SFDC_USERNAME} -p
+
+
+
+
+
+
+
+
+
+
+
+
