@@ -54,6 +54,10 @@ To logOut orgs
 -----------------
 SFDX force:auth:logout -u ${SFDC_USERNAME} -p
 
+To Deloy Source to Dev Org
+--------------------------
+sfdx force:source:deploy -x manifest/package.xml -u ${HUB_ORG}
+
 
 
 
